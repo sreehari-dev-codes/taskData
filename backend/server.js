@@ -91,7 +91,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Setup with proper error handling
-const allowedOrigins = ["http://localhost:3000", "http://localhost:3001", "https://task-data.vercel.app", "https://taskdata.onrender.com"];
+const allowedOrigins = ["http://localhost:3000", "http://localhost:3001", "https://task-data.vercel.app"];
 app.use(
     cors({
         origin: (origin, callback) => {
