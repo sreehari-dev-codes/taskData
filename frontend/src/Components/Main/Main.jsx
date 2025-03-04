@@ -4,6 +4,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import SignUp from "../SignUp/SingUp";
 import Login from "../Login/Login";
 import User from "../User/User";
+import Error from "../Error/Error";
 import Admin from "../Admin/Admin";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/userD/User";
@@ -49,25 +50,34 @@ function Main() {
     }, []);
 
     return (
-        <div>
-            {location.pathname !== "/admin" && <Header />}
-            <Routes>
-                <Route path="/" element={<Hero />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
+      <div>
+        {location.pathname !== "/admin" && <Header />}
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Error />} />
 
-                {/* Protected admin route */}
-                <Route path="/admin"  element={
-                        <ProtectedRoute
-                            element={<Admin />}
-                            requiredRole="admin"  // Only allow users with "admin" role
-                        />
-                    } />
+          {/* Protected admin route */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute
+                element={<Admin />}
+                requiredRole="admin" // Only allow users with "admin" role
+              />
+            }
+          />
 
-                {/* Protected user profile route */}
-                <Route path="/userProfile" element={<ProtectedRoute  element={<User/>} requiredRole={"user"}/>} />
-            </Routes>
-        </div>
+          {/* Protected user profile route */}
+          <Route
+            path="/userProfile"
+            element={
+              <ProtectedRoute element={<User />} requiredRole={"user"} />
+            }
+          />
+        </Routes>
+      </div>
     );
 }
 
